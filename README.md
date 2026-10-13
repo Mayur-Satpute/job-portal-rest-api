@@ -356,9 +356,3 @@ No license has been selected yet. Until one is added, **do not assume permission
 ⭐ *Star this repo if you find it useful — it helps the project grow!*
 
 </div>
-"""
-
-output_path = Path("/mnt/agents/output/README.md")
-output_path.write_text(readme, encoding="utf-8")
-print(f"Created: {output_path}")
-print(f"Size: {output_path.stat().st_size} bytes")
