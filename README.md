@@ -1,186 +1,213 @@
 from pathlib import Path
-import pypandoc
 
-markdown = r"""# Job Portal REST API
+readme = r"""# 🚀 Job Portal REST API
 
-A RESTful backend for a job portal where candidates can discover jobs and apply, recruiters can manage job postings, and administrators can oversee the platform. Built with Django and Django REST Framework, with MySQL as the database.
+<div align="center">
 
-> **Project status:** In development. The custom user model, initial database setup, API documentation configuration, and candidate/recruiter registration endpoint are in place. Features listed under the roadmap are planned and should not be considered implemented yet.
+**A RESTful backend for a modern job portal** — candidates discover jobs and apply, recruiters manage postings, and administrators oversee the platform.
 
-## Table of Contents
+Built with **Django · Django REST Framework · MySQL**
 
-- [Overview](#overview)
-- [Technology Stack](#technology-stack)
-- [Current Features](#current-features)
-- [Planned Features](#planned-features)
-- [Project Structure](#project-structure)
-- [Prerequisites](#prerequisites)
-- [Local Setup](#local-setup)
-- [Environment Variables](#environment-variables)
-- [API Documentation](#api-documentation)
-- [API Endpoints](#api-endpoints)
-- [Testing](#testing)
-- [Security Notes](#security-notes)
-- [Development Workflow](#development-workflow)
-- [Contributing](#contributing)
-- [License](#license)
+[![Django](https://img.shields.io/badge/Django-6.1-092E20?logo=django&logoColor=white)](https://www.djangoproject.com/)
+[![DRF](https://img.shields.io/badge/DRF-3.18-red)](https://www.django-rest-framework.org/)
+[![Python](https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.4-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Swagger](https://img.shields.io/badge/Docs-Swagger%20UI-85EA2D?logo=swagger&logoColor=black)](#-api-documentation)
+[![License](https://img.shields.io/badge/License-None--Yet-lightgrey)](https://choosealicense.com/)
 
-## Overview
+</div>
 
-The goal of this project is to build an interview-ready backend that demonstrates practical backend engineering concepts:
+> [!IMPORTANT]
+> **Project status: 🟡 In development.** The custom user model, MySQL setup, API documentation, and candidate/recruiter registration endpoint are in place. Roadmap items are **planned, not implemented**.
 
-- REST API design and HTTP status codes
-- Custom user models and authentication
-- Role-based access control (RBAC)
-- Relational database design with Django ORM and MySQL
-- Input validation and consistent error handling
-- Search, filtering, ordering, and pagination
-- Automated API tests
-- API documentation with OpenAPI and Swagger UI
-- Secure configuration using environment variables
+---
 
-## Technology Stack
+## 📋 Table of Contents
+
+- [✨ Overview](#-overview)
+- [🧰 Tech Stack](#-tech-stack)
+- [✅ Current Features](#-current-features)
+- [🗺️ Roadmap](#️-roadmap)
+- [📁 Project Structure](#-project-structure)
+- [⚙️ Prerequisites](#️-prerequisites)
+- [🔧 Local Setup](#-local-setup)
+- [🔐 Environment Variables](#-environment-variables)
+- [📚 API Documentation](#-api-documentation)
+- [🔌 API Endpoints](#-api-endpoints)
+- [🧪 Testing](#-testing)
+- [🔒 Security Notes](#-security-notes)
+- [🔄 Development Workflow](#-development-workflow)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+
+---
+
+## ✨ Overview
+
+An interview-ready backend showcasing **practical backend engineering** concepts:
+
+| Concept | Where it shows up |
+|---|---|
+| 🌐 REST API design & HTTP status codes | All endpoints |
+| 👤 Custom user models & JWT auth | `accounts/` app |
+| 🛡️ Role-based access control (RBAC) | Candidate / Recruiter / Admin roles |
+| 🗄️ Relational schema design | Django ORM + MySQL |
+| ✅ Input validation & consistent errors | DRF serializers |
+| 🔍 Search, filtering, ordering, pagination | Job listings |
+| 🧪 Automated API tests | `python manage.py test` |
+| 📖 OpenAPI docs (Swagger UI / ReDoc) | drf-spectacular |
+| 🔐 Secure config via environment variables | `python-dotenv` |
+
+---
+
+## 🧰 Tech Stack
 
 | Technology | Purpose |
 |---|---|
-| Python | Backend programming language |
-| Django | Web framework and project configuration |
-| Django REST Framework | REST API views, serializers, and permissions |
-| MySQL | Relational database |
-| Django ORM | Database queries and model relationships |
-| Simple JWT | JWT-based authentication |
-| django-filter | Query parameter filtering |
-| drf-spectacular | OpenAPI schema and API documentation |
-| python-dotenv | Loading local environment variables |
-| Git and GitHub | Version control and source hosting |
+| Python 3.14.8 | Backend language |
+| Django 6.1.2 | Web framework & project config |
+| Django REST Framework 3.18.1 | API views, serializers, permissions |
+| MySQL Server 8.4.11 | Relational database |
+| Django ORM | Queries & model relationships |
+| Simple JWT 5.5.1 | Token-based authentication |
+| django-filter 26.2 | Query-parameter filtering |
+| drf-spectacular 0.30.0 | OpenAPI schema & docs |
+| python-dotenv 1.2.4 | Local environment variables |
+| mysqlclient 2.3.0 | MySQL database driver |
+| Git & GitHub | Version control & hosting |
 
-Versions used during initial development include Python 3.14.8, Django 6.1.2, MySQL Server 8.4.11, Django REST Framework 3.18.1, django-filter 26.2, drf-spectacular 0.30.0, Simple JWT 5.5.1, mysqlclient 2.3.0, and python-dotenv 1.2.4. Confirm dependency compatibility and update the dependency lock/requirements file as the project evolves.
+> ⚠️ Versions reflect the initial development environment. Re-verify dependency compatibility and update `requirements.txt` as the project evolves.
 
-## Current Features
+---
+
+## ✅ Current Features
+
+**Done** ✅
 
 - [x] Django project initialized
-- [x] MySQL database configured through environment variables
-- [x] Custom `User` model based on Django's `AbstractUser`
-- [x] User roles defined: `CANDIDATE`, `RECRUITER`, and `ADMIN`
-- [x] Candidate/recruiter registration serializer with role-choice validation
-- [x] Registration endpoint at `POST /api/auth/register/`
-- [x] JWT token and refresh URL configuration
-- [x] OpenAPI schema, Swagger UI, and ReDoc URL configuration
-- [ ] Complete and test JWT login/refresh behavior
-- [ ] Automated tests for registration and authentication
+- [x] MySQL database configured via environment variables
+- [x] Custom `User` model (`AbstractUser`)
+- [x] Roles defined: `CANDIDATE` · `RECRUITER` · `ADMIN`
+- [x] Registration serializer with role-choice validation
+- [x] `POST /api/auth/register/` — *manually tested* ✅
+- [x] JWT token & refresh URL configuration
+- [x] OpenAPI schema, Swagger UI & ReDoc routes
 
-## Planned Features
+**In Progress** 🟡
 
-### Authentication and Authorization
-- Candidate and recruiter registration
-- JWT login and refresh
-- Password validation and authentication tests
-- Role-based and object-level permissions
-- Admin-only platform management
+- [ ] Complete & test JWT login/refresh end-to-end
+- [ ] Automated tests for registration & authentication
 
-### Candidate and Recruiter Profiles
-- Candidate profile, skills, experience, and resume details
-- Recruiter profile and company association
-- Profile read/update endpoints with ownership checks
+---
 
-### Companies and Jobs
-- Company creation and management
-- Job creation, detail, update, and deletion endpoints
-- Recruiter ownership rules
-- Job status management (for example, open and closed)
-- Search, filtering, ordering, and pagination
+## 🗺️ Roadmap
 
-### Applications
-- Apply to a job
-- Prevent duplicate applications to the same job
-- Prevent applications to closed jobs
-- Track application status
-- Enforce candidate/recruiter permissions and application ownership
+### 🔐 Authentication & Authorization
+- [ ] JWT login & refresh flow
+- [ ] Password validation & auth tests
+- [ ] Role-based and object-level permissions
+- [ ] Admin-only platform management
 
-### Quality and Delivery
-- Automated unit and API tests
-- Consistent validation and error responses
-- ORM query optimization
-- API documentation and example requests
-- Production configuration and deployment guidance
+### 👤 Profiles
+- [ ] Candidate profile: skills, experience, resume
+- [ ] Recruiter profile & company association
+- [ ] Profile read/update with ownership checks
 
-## Project Structure
+### 🏢 Companies & Jobs
+- [ ] Company creation & management
+- [ ] Job CRUD endpoints (detail, update, delete)
+- [ ] Recruiter ownership rules
+- [ ] Job status management (`open` / `closed`)
+- [ ] Search, filtering, ordering & pagination
+
+### 📨 Applications
+- [ ] Apply to a job
+- [ ] Block duplicate applications
+- [ ] Block applications to closed jobs
+- [ ] Application status tracking
+- [ ] Candidate/recruiter permission enforcement
+
+### 🧪 Quality & Delivery
+- [ ] Unit & API test coverage
+- [ ] Consistent validation & error responses
+- [ ] ORM query optimization
+- [ ] Documented example requests
+- [ ] Production deployment guidance
+
+---
+
+## 📁 Project Structure
 
 ```text
 job-portal-rest-api/
-├── accounts/                 # Custom user model and authentication
+├── accounts/                 # Custom user model & authentication
 ├── applications/             # Planned job application functionality
-├── companies/                # Planned company and recruiter functionality
+├── companies/                # Planned company & recruiter functionality
 ├── jobs/                     # Planned job posting functionality
-├── job_portal/               # Django settings and URL configuration
+├── job_portal/               # Django settings & URL configuration
 ├── manage.py
 ├── .env.example              # Environment variable template
 ├── .gitignore
 └── README.md
 ```
 
-Django migration files and additional modules will be added as the application develops.
+> Django migrations and additional modules will be added as the application develops.
 
-## Prerequisites
+---
 
-Install the following before setting up the project:
+## ⚙️ Prerequisites
 
-- Python 3.14.8 (or another version verified against the project's dependencies)
-- MySQL Server 8.4.x
-- Git
-- A terminal and code editor
-- MySQL Workbench is optional but useful for database administration
+- [Python](https://www.python.org/downloads/) 3.14.8 *(or a version verified against project dependencies)*
+- [MySQL Server](https://dev.mysql.com/downloads/mysql/) 8.4.x
+- [Git](https://git-scm.com/)
+- A terminal & code editor *(MySQL Workbench optional but handy)*
 
-## Local Setup
+---
 
-### 1. Clone the repository
+## 🔧 Local Setup
+
+### 1️⃣ Clone the repository
 
 ```bash
 git clone https://github.com/Mayur-Satpute/job-portal-rest-api.git
 cd job-portal-rest-api
 ```
 
-### 2. Create and activate a virtual environment
+### 2️⃣ Create & activate a virtual environment
 
 **Windows CMD:**
-
 ```cmd
 python -m venv venv
 venv\Scripts\activate
 ```
 
 **PowerShell:**
-
 ```powershell
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 ```
 
-### 3. Install dependencies
-
-The project should have a maintained `requirements.txt` as dependencies are finalized. Until that file is added, install the currently used packages:
+### 3️⃣ Install dependencies
 
 ```bash
-python -m pip install Django==6.1.2 mysqlclient==2.3.0 python-dotenv==1.2.4 djangorestframework==3.18.1 django-filter==26.2 drf-spectacular==0.30.0 djangorestframework-simplejwt==5.5.1
+python -m pip install Django==6.1.2 mysqlclient==2.3.0 python-dotenv==1.2.4 \
+  djangorestframework==3.18.1 django-filter==26.2 \
+  drf-spectacular==0.30.0 djangorestframework-simplejwt==5.5.1
 ```
 
-If a package cannot be installed for your platform or Python version, check its current compatibility and use a supported version rather than bypassing the error.
+> 💡 If a package won't install on your platform/Python version, check compatibility and use a supported version — don't bypass the error.
 
-### 4. Create the MySQL database
-
-In MySQL Workbench or a MySQL client, run:
+### 4️⃣ Create the MySQL database
 
 ```sql
 CREATE DATABASE job_portal_db;
 ```
 
-If the database already exists, do not drop it; just verify that it is the intended development database.
+> If the database already exists, don't drop it — just verify it's the intended dev database.
 
-### 5. Configure environment variables
+### 5️⃣ Configure environment variables
 
-Copy `.env.example` to `.env` and set the values for your local database. On Windows CMD, you can create/edit `.env` using your editor.
-
-Example `.env`:
+Copy `.env.example` → `.env` and fill in your local database credentials:
 
 ```dotenv
 DB_NAME=job_portal_db
@@ -190,111 +217,117 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 ```
 
-Never commit `.env` or place real credentials in `.env.example`. The repository's `.gitignore` should exclude `.env`.
+> 🚫 Never commit `.env` or put real credentials in `.env.example`. `.gitignore` should exclude `.env`.
 
-### 6. Apply migrations
+### 6️⃣ Apply migrations
 
 ```bash
 python manage.py migrate
 ```
 
-### 7. Run system checks
+### 7️⃣ Run system checks
 
 ```bash
 python manage.py check
 ```
 
-### 8. Start the development server
+### 8️⃣ Start the dev server 🎉
 
 ```bash
 python manage.py runserver
 ```
 
-The API is then available at `http://127.0.0.1:8000/`.
+The API is live at **`http://127.0.0.1:8000/`**
 
-## Environment Variables
+---
+
+## 🔐 Environment Variables
 
 | Variable | Description | Example |
 |---|---|---|
 | `DB_NAME` | MySQL database name | `job_portal_db` |
 | `DB_USER` | MySQL username | `root` |
-| `DB_PASSWORD` | Local MySQL password | Set privately in `.env` |
+| `DB_PASSWORD` | Local MySQL password | *(set privately in `.env`)* |
 | `DB_HOST` | MySQL host | `127.0.0.1` |
 | `DB_PORT` | MySQL port | `3306` |
 
-Use a dedicated database user with only the privileges needed for the application in non-local environments. Do not use a personal or production password in screenshots, commits, or issue reports.
+> Use a dedicated, least-privilege database user in non-local environments.
 
-## API Documentation
+---
 
-With the development server running:
+## 📚 API Documentation
 
-- **Swagger UI:** `http://127.0.0.1:8000/api/docs/`
-- **OpenAPI schema:** `http://127.0.0.1:8000/api/schema/`
-- **ReDoc:** `http://127.0.0.1:8000/api/redoc/`
+With the dev server running:
 
-These routes are configured in the project. The schema will grow as API endpoints are implemented.
+| Interface | URL |
+|---|---|
+| 🟢 **Swagger UI** | http://127.0.0.1:8000/api/docs/ |
+| 📄 **OpenAPI schema** | http://127.0.0.1:8000/api/schema/ |
+| 🔴 **ReDoc** | http://127.0.0.1:8000/api/redoc/ |
 
-## API Endpoints
+The schema grows as new endpoints land.
 
-### Implemented/configured
+---
+
+## 🔌 API Endpoints
+
+### Implemented / Configured
 
 | Method | Endpoint | Purpose | Status |
 |---|---|---|---|
-| `POST` | `/api/auth/register/` | Register a candidate or recruiter | Implemented; manual registration test passed |
-| `POST` | `/api/token/` | Obtain JWT access and refresh tokens | Configured; end-to-end test pending |
-| `POST` | `/api/token/refresh/` | Refresh an access token | Configured; end-to-end test pending |
-| `GET` | `/api/schema/` | Retrieve the OpenAPI schema | Configured |
-| `GET` | `/api/docs/` | Swagger UI | Configured |
-| `GET` | `/api/redoc/` | ReDoc documentation | Configured |
+| `POST` | `/api/auth/register/` | Register a candidate or recruiter | ✅ Implemented *(manual test passed)* |
+| `POST` | `/api/token/` | Obtain JWT access + refresh tokens | 🟡 Configured *(e2e pending)* |
+| `POST` | `/api/token/refresh/` | Refresh an access token | 🟡 Configured *(e2e pending)* |
+| `GET` | `/api/schema/` | OpenAPI schema | ✅ Configured |
+| `GET` | `/api/docs/` | Swagger UI | ✅ Configured |
+| `GET` | `/api/redoc/` | ReDoc docs | ✅ Configured |
 
-JWT token endpoints use Simple JWT's default token view behavior. A user must exist before token issuance can be tested.
+> JWT endpoints use Simple JWT's default token views. A user must exist before token issuance can be tested.
 
 ### Planned
 
-The following endpoints will be documented here as they are implemented:
-
-- Candidate and recruiter profile endpoints
+- Candidate & recruiter profile endpoints
 - Company CRUD endpoints
-- Job CRUD, search, filter, and ordering endpoints
-- Job application and status-management endpoints
+- Job CRUD + search / filter / ordering
+- Application & status-management endpoints
 
-## Testing
+---
 
-Run Django's system checks:
+## 🧪 Testing
 
 ```bash
+# System checks
 python manage.py check
-```
 
-Run the automated test suite:
-
-```bash
+# Full test suite
 python manage.py test
 ```
 
-Automated tests are planned and should be expanded to cover successful registration, invalid roles, duplicate usernames/emails, password hashing, JWT authentication, permissions, job workflows, and application rules.
+**Planned coverage:** successful registration, invalid roles, duplicate username/email, password hashing, JWT auth, permissions, job workflows, application rules.
 
-## Security Notes
+---
 
-- Keep `.env` out of Git.
-- Use Django's `create_user()` to create users so passwords are hashed.
-- Do not allow public registration to assign the `ADMIN` role.
-- Protect private endpoints with authentication and explicit permissions.
-- Validate ownership before allowing users to edit or delete resources.
-- Use strong local passwords and a least-privilege database account outside local development.
-- Do not treat this project as production-ready until security settings, automated tests, deployment configuration, and operational requirements have been reviewed.
+## 🔒 Security Notes
 
-## Development Workflow
+- 🔑 Keep `.env` out of Git
+- 🧂 Use Django's `create_user()` so passwords are hashed
+- 🚫 Never allow public registration to assign the `ADMIN` role
+- 🛡️ Protect private endpoints with authentication & explicit permissions
+- 👤 Validate ownership before any edit/delete
+- 💪 Strong local passwords; least-privilege DB accounts outside dev
+- ⚠️ **Not production-ready** until security settings, tests, and deployment config are reviewed
 
-Work feature by feature:
+---
 
-1. Implement a small feature.
-2. Run `python manage.py check` and relevant tests.
-3. Inspect changes using `git status` and `git diff`.
-4. Commit the feature with a descriptive message.
-5. Push the commit to GitHub.
+## 🔄 Development Workflow
 
-Example commit messages:
+1. 🧩 Implement a small feature
+2. ✅ Run `python manage.py check` + relevant tests
+3. 👀 Review changes with `git status` / `git diff`
+4. 💬 Commit with a descriptive message
+5. 🚀 Push to GitHub
+
+**Commit message convention** (Conventional Commits):
 
 ```text
 feat: implement user registration
@@ -304,16 +337,30 @@ test: cover application permissions
 docs: update API setup instructions
 ```
 
-## Contributing
+---
 
-This is a learning project under active development. Suggestions, issues, and constructive feedback are welcome. For substantial changes, open an issue first to discuss the proposed implementation.
+## 🤝 Contributing
 
-## License
+This is a **learning project under active development**. Suggestions, issues, and constructive feedback are welcome!
 
-No license has been added yet. Until a license is selected and committed, do not assume that others have permission to reuse, distribute, or modify this project's code.
+For substantial changes, please **open an issue first** to discuss the proposed implementation.
+
+---
+
+## 📄 License
+
+No license has been selected yet. Until one is added, **do not assume permission** to reuse, distribute, or modify this project's code.
+
+---
+
+<div align="center">
+
+⭐ *Star this repo if you find it useful — it helps the project grow!*
+
+</div>
 """
 
-output_path = Path("/mnt/data/README.md")
-pypandoc.convert_text(markdown, "md", format="md", outputfile=str(output_path), extra_args=["--standalone"])
+output_path = Path("/mnt/agents/output/README.md")
+output_path.write_text(readme, encoding="utf-8")
 print(f"Created: {output_path}")
 print(f"Size: {output_path.stat().st_size} bytes")
