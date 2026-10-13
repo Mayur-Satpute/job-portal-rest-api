@@ -1,6 +1,4 @@
-from pathlib import Path
-
-readme = r"""# 🚀 Job Portal REST API
+# 🚀 Job Portal REST API
 
 <div align="center">
 
